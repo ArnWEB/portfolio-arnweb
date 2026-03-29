@@ -1,0 +1,4 @@
+src/App.tsx(3,48): error TS6133: 'FolderGit2' is declared but its value is never read.
+src/App.tsx(3,76): error TS6133: 'Star' is declared but its value is never read.
+src/App.tsx(3,125): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/App.tsx(3,133): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.

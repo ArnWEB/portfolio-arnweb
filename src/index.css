@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+}
+
+@layer base {
+  :root {
+    --color-bg: #0d1117;
+    --color-term-bg: #1c2132;
+    --color-term-border: #2a3147;
+    --color-term-text: #8b9eb0;
+    --color-term-text-h: #ffffff;
+    --color-term-accent: #f2ad7b;
+    --color-term-green: #a3e635;
+    --color-term-red: #f87171;
+    --glow-color-1: rgba(30, 58, 138, 0.2);
+    --glow-color-2: rgba(120, 53, 15, 0.1);
+    --glow-color-3: rgba(88, 28, 135, 0.1);
+  }
+
+  [data-theme="matrix"] {
+    --color-bg: #000000;
+    --color-term-bg: #0a0a0a;
+    --color-term-border: #003300;
+    --color-term-text: #008800;
+    --color-term-text-h: #00ff00;
+    --color-term-accent: #00ff00;
+    --color-term-green: #00ff00;
+    --glow-color-1: rgba(0, 255, 0, 0.1);
+    --glow-color-2: rgba(0, 50, 0, 0.2);
+    --glow-color-3: rgba(0, 255, 0, 0.05);
+  }
+
+  [data-theme="dracula"] {
+    --color-bg: #282a36;
+    --color-term-bg: #44475a;
+    --color-term-border: #6272a4;
+    --color-term-text: #f8f8f2;
+    --color-term-text-h: #ff79c6;
+    --color-term-accent: #bd93f9;
+    --color-term-green: #50fa7b;
+    --glow-color-1: rgba(189, 147, 249, 0.2);
+    --glow-color-2: rgba(255, 121, 198, 0.1);
+    --glow-color-3: rgba(80, 250, 123, 0.1);
+  }
+
+  body {
+    @apply m-0 p-0 overflow-hidden font-mono antialiased bg-[var(--color-bg)] text-[var(--color-term-text)] transition-colors duration-700;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background-color: color-mix(in srgb, var(--color-term-bg) 90%, transparent);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--color-term-border);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-term-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-term-accent);
+}
+
+::selection {
+  background-color: var(--color-term-accent);
+  color: #000;
+}
