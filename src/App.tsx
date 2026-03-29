@@ -656,7 +656,7 @@ export default function App() {
       <motion.div
         ref={windowRef} drag dragConstraints={{ left: -300, right: 300, top: -200, bottom: 200 }} dragElastic={0.1} dragMomentum={false}
         initial={{ opacity: 0, scale: 0.8, rotateX: 20, y: 50 }} animate={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }} transition={{ duration: 0.8, type: "spring", bounce: 0.4 }} style={{ perspective: 1000 }}
-        className="w-full max-w-[1500px] h-auto sm:h-full sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
+        className="w-full max-w-[1500px] h-full max-h-[95vh] sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
       >
         {/* Title Bar */}
         <div className="h-10 shrink-0 bg-[var(--color-bg)]/90 border-b border-[var(--color-term-border)] flex items-center px-4 justify-between select-none cursor-move group">
@@ -673,7 +673,7 @@ export default function App() {
         </div>
 
         {/* Scrolling Terminal History */}
-        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)' }}>
+        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth h-0 min-h-0" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', flex: '1 1 auto' }}>
           {history.map((item, index) => (
             <div key={item.id} className="w-full flex flex-col max-w-full">
               {item.type === 'command' && (
