@@ -235,9 +235,9 @@ type HistoryItem = {
 };
 
 const HomeOutput = ({ executeCommand, mode }: { executeCommand: (cmd: string) => void; mode: string }) => (
-  <div className="flex flex-col xl:flex-row w-full gap-4 flex-1" style={{ minHeight: 'calc(100% - 2rem)' }}>
+  <div className="flex flex-col xl:flex-row w-full gap-2 sm:gap-4 flex-1" style={{ minHeight: 'calc(100% - 2rem)' }}>
     {/* Left: 3D Canvas — stretches to full height of the row */}
-    <div className="xl:w-[42%] rounded-xl overflow-hidden border border-[var(--color-term-border)] relative flex-1 xl:flex-none" style={{ minHeight: '220px' }}>
+    <div className="xl:w-[42%] rounded-xl overflow-hidden border border-[var(--color-term-border)] relative flex-1 xl:flex-none" style={{ minHeight: '180px' }}>
       <FragmentedCognitiveCore mode={mode} />
       {/* Contact overlay pinned to bottom of the 3D block */}
       <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-gradient-to-t from-black/80 to-transparent">
@@ -646,7 +646,7 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen w-full flex items-center justify-center p-2 sm:p-6 lg:p-12 font-mono relative overflow-hidden text-[var(--color-term-text)] text-sm transition-colors duration-700 bg-black">
+    <div className="min-h-screen w-full flex items-center justify-center p-1 sm:p-6 lg:p-12 font-mono relative overflow-hidden text-[var(--color-term-text)] text-sm transition-colors duration-700 bg-black">
 
       <Background3D />
 
@@ -656,7 +656,7 @@ export default function App() {
       <motion.div
         ref={windowRef} drag dragConstraints={{ left: -300, right: 300, top: -200, bottom: 200 }} dragElastic={0.1} dragMomentum={false}
         initial={{ opacity: 0, scale: 0.8, rotateX: 20, y: 50 }} animate={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }} transition={{ duration: 0.8, type: "spring", bounce: 0.4 }} style={{ perspective: 1000 }}
-        className="w-full max-w-[1500px] h-full sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
+        className="w-full max-w-[1500px] h-auto sm:h-full sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
       >
         {/* Title Bar */}
         <div className="h-10 shrink-0 bg-[var(--color-bg)]/90 border-b border-[var(--color-term-border)] flex items-center px-4 justify-between select-none cursor-move group">
@@ -673,7 +673,7 @@ export default function App() {
         </div>
 
         {/* Scrolling Terminal History */}
-        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)' }}>
+        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)' }}>
           {history.map((item, index) => (
             <div key={item.id} className="w-full flex flex-col max-w-full">
               {item.type === 'command' && (
@@ -737,16 +737,16 @@ export default function App() {
             )}
           </AnimatePresence>
 
-          <form onSubmit={handleFormSubmit} className="flex items-center gap-3 sm:gap-4 w-full p-4">
+          <form onSubmit={handleFormSubmit} className="flex items-center gap-2 sm:gap-4 w-full p-2 sm:p-4">
             <span className="font-bold text-lg select-none shrink-0" style={{ color: 'var(--color-term-accent)' }}>
               <ChevronRight size={24} strokeWidth={3} />
             </span>
             <input
               ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} onBlur={() => setTimeout(() => setShowAutocomplete(false), 200)}
-              placeholder="Type a command (e.g. /experience) or ask the AI..."
-              className="flex-1 bg-transparent border-none outline-none font-bold font-mono text-sm sm:text-base w-full min-w-0 placeholder-opacity-40"
+              placeholder="Type command..."
+              className="flex-1 bg-transparent border-none outline-none font-bold font-mono text-xs sm:text-sm w-full min-w-0 placeholder-opacity-40"
               style={{ color: 'var(--color-term-text-h)', caretColor: 'var(--color-term-accent)' }}
-              autoFocus autoComplete="off" spellCheck="false"
+              autoComplete="off" spellCheck="false"
             />
             <button
               type="submit" className="p-2.5 rounded-lg transition-all shrink-0 hover:opacity-80 disabled:opacity-20 shadow-sm" disabled={!input.trim()}
