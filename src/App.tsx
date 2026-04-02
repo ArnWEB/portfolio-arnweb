@@ -691,9 +691,9 @@ export default function App() {
       <motion.div animate={{ x: mousePos.x - 300, y: mousePos.y - 300 }} transition={{ type: "spring", damping: 50, stiffness: 200, mass: 0.5 }} className="absolute w-[600px] h-[600px] rounded-full blur-[100px] opacity-40 z-0 pointer-events-none" style={{ background: 'var(--glow-color-1)' }} />
 
 <motion.div
-        ref={windowRef} drag dragConstraints={{ left: -300, right: 300, top: -200, bottom: 200 }} dragElastic={0.1} dragMomentum={false}
+        ref={windowRef} drag={false}
         initial={{ opacity: 0, scale: 0.8, rotateX: 20, y: 50 }} animate={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }} transition={{ duration: 0.8, type: "spring", bounce: 0.4 }} style={{ perspective: 1000 }}
-        className="w-full max-w-[1500px] h-full max-h-[100vh] sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
+        className="w-full max-w-[1500px] h-full max-h-[100vh] sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl sm:rounded-none flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
       >
         {/* Title Bar */}
         <div className="h-10 sm:h-10 shrink-0 bg-[var(--color-bg)]/90 border-b border-[var(--color-term-border)] flex items-center px-3 sm:px-4 justify-between select-none cursor-move group">
