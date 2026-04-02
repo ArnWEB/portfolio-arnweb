@@ -5,6 +5,14 @@ import { OrbitControls, Stars, Text as DreiText } from '@react-three/drei';
 import * as THREE from 'three';
 import { Terminal, Send, TerminalSquare, Info, Briefcase, Zap, Palette, GraduationCap, Globe, Link2, Mail, ChevronRight } from 'lucide-react';
 
+const generateSessionId = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
 
 
 const COMMANDS = [
@@ -184,7 +192,7 @@ function FragmentedCognitiveCore({ mode }: { mode: string }) {
   }
 
   return (
-<div className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden bg-black">
+    <div className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden bg-black">
       <Canvas
         gl={{ antialias: true, preserveDrawingBuffer: true }}
         camera={{ position: [0, 0, 3.0], fov: 55 }}
@@ -288,12 +296,12 @@ const HomeOutput = ({ executeCommand, mode }: { executeCommand: (cmd: string) =>
 
 const ExperienceOutput = () => (
   <div className="w-full flex flex-col my-6 animate-fade-in-up">
-    <h2 className="font-extrabold text-2xl sm:text-3xl mb-6 tracking-wide" style={{ color: 'var(--color-term-accent)' }}>Professional Experience</h2>
+    <h2 className="font-extrabold text-2xl sm:text-3xl mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-term-accent)' }}>Professional Experience</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
       {/* EY GDS */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>Ernst & Young GDS</h3>
+          <h3 className="font-bold text-lg sm:text-xl" style={{ color: 'var(--color-term-accent)' }}>Ernst & Young GDS</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-green-600 text-white whitespace-nowrap">May 2025 - Current</span>
         </div>
         <div className="text-sm font-bold mb-4 uppercase tracking-wider opacity-90" style={{ color: 'var(--color-term-text-h)' }}>Senior AI Analyst (AI & DATA) • Kolkata</div>
@@ -308,7 +316,7 @@ const ExperienceOutput = () => (
       {/* LTIMindtree */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>LTIMindtree</h3>
+          <h3 className="font-bold text-lg sm:text-xl" style={{ color: 'var(--color-term-accent)' }}>LTIMindtree</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-600 text-white whitespace-nowrap">2021 - 2025</span>
         </div>
         <div className="text-sm font-bold mb-4 uppercase tracking-wider opacity-90" style={{ color: 'var(--color-term-text-h)' }}>Associate GenAI Engineer (Insurance) • Kolkata</div>
@@ -335,7 +343,7 @@ const SkillsOutput = () => (
         { title: "Enterprise & Security", skills: "OAuth2, Azure AD, Azure Service Bus, Neo4j, Compliance Systems" },
       ].map((block, i) => (
         <div key={i} className="border p-6 rounded-xl bg-[var(--color-bg)]/40 hover:bg-[var(--color-bg)]/80 transition-colors" style={{ borderColor: 'var(--color-term-border)' }}>
-          <h3 className="font-bold text-lg mb-4 flex items-center gap-2 uppercase tracking-wide" style={{ color: 'var(--color-term-accent)' }}>
+          <h3 className="font-bold text-base sm:text-lg mb-3 sm:mb-4 flex items-center gap-2 uppercase tracking-wide" style={{ color: 'var(--color-term-accent)' }}>
             {block.title}
           </h3>
           <p className="leading-loose font-semibold opacity-90 text-[var(--color-term-text-h)]">
@@ -355,7 +363,7 @@ const EducationOutput = () => (
       {/* Card 1: MCA */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md h-full min-h-[190px]" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>Masters of Computer Application</h3>
+          <h3 className="font-bold text-base sm:text-lg md:text-xl" style={{ color: 'var(--color-term-accent)' }}>Masters of Computer Application</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-green-600 text-white">2020-2022</span>
         </div>
         <div className="text-base" style={{ color: 'var(--color-term-text-h)' }}>Future Institute of Engineering & Management</div>
@@ -364,7 +372,7 @@ const EducationOutput = () => (
       {/* Card 2: BSc */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md h-full min-h-[190px]" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>Bachelor of Computer Science</h3>
+          <h3 className="font-bold text-base sm:text-lg md:text-xl" style={{ color: 'var(--color-term-accent)' }}>Bachelor of Computer Science</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-green-600 text-white whitespace-nowrap">2017 - 2020</span>
         </div>
         <div className="text-base" style={{ color: 'var(--color-term-text-h)' }}>Ramakrishna Mission Residential College</div>
@@ -373,7 +381,7 @@ const EducationOutput = () => (
       {/* Card 3: Higher Secondary */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md h-full min-h-[190px]" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>Higher Secondary (Class XII)</h3>
+          <h3 className="font-bold text-base sm:text-lg md:text-xl" style={{ color: 'var(--color-term-accent)' }}>Higher Secondary (Class XII)</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-600 text-white whitespace-nowrap">2017</span>
         </div>
         <div className="text-base" style={{ color: 'var(--color-term-text-h)' }}>Jodhpur Park Boys</div>
@@ -382,7 +390,7 @@ const EducationOutput = () => (
       {/* Card 4: Secondary */}
       <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md h-full min-h-[190px]" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
         <div className="flex items-center justify-between mb-2 gap-2">
-          <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-accent)' }}>Secondary (Class X)</h3>
+          <h3 className="font-bold text-base sm:text-lg md:text-xl" style={{ color: 'var(--color-term-accent)' }}>Secondary (Class X)</h3>
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-teal-600 text-white whitespace-nowrap">2015</span>
         </div>
         <div className="text-base" style={{ color: 'var(--color-term-text-h)' }}>Jodhpur Park Boys</div>
@@ -410,7 +418,7 @@ const HelpOutput = () => (
 
 const SocialOutput = ({ type }: { type: string }) => (
   <div className="w-full flex flex-col my-6 animate-fade-in-up">
-    <h2 className="font-extrabold text-2xl sm:text-3xl mb-6 tracking-wide" style={{ color: 'var(--color-term-accent)' }}>
+    <h2 className="font-extrabold text-2xl sm:text-3xl mb-4 sm:mb-6 tracking-wide" style={{ color: 'var(--color-term-accent)' }}>
       {type === 'social' ? 'Social Links' : type === 'linkedin' ? 'LinkedIn' : type === 'github' ? 'GitHub' : type === 'email' ? 'Email' : 'Contact'}
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
@@ -419,7 +427,7 @@ const SocialOutput = ({ type }: { type: string }) => (
           <div className="flex items-center gap-4">
             <Link2 size={32} style={{ color: 'var(--color-term-accent)' }} />
             <div>
-              <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-text-h)' }}>LinkedIn</h3>
+              <h3 className="font-bold text-lg sm:text-xl" style={{ color: 'var(--color-term-text-h)' }}>LinkedIn</h3>
               <p className="text-sm opacity-70">linkedin.com/in/arnweb</p>
             </div>
           </div>
@@ -430,7 +438,7 @@ const SocialOutput = ({ type }: { type: string }) => (
           <div className="flex items-center gap-4">
             <Globe size={32} style={{ color: 'var(--color-term-accent)' }} />
             <div>
-              <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-text-h)' }}>GitHub</h3>
+              <h3 className="font-bold text-lg sm:text-xl" style={{ color: 'var(--color-term-text-h)' }}>GitHub</h3>
               <p className="text-sm opacity-70">github.com</p>
             </div>
           </div>
@@ -441,7 +449,7 @@ const SocialOutput = ({ type }: { type: string }) => (
           <div className="flex items-center gap-4">
             <Mail size={32} style={{ color: 'var(--color-term-accent)' }} />
             <div>
-              <h3 className="font-bold text-xl" style={{ color: 'var(--color-term-text-h)' }}>Email</h3>
+              <h3 className="font-bold text-lg sm:text-xl" style={{ color: 'var(--color-term-text-h)' }}>Email</h3>
               <p className="text-sm opacity-70">arnabkundu854@gmail.com</p>
             </div>
           </div>
@@ -449,7 +457,7 @@ const SocialOutput = ({ type }: { type: string }) => (
       )}
       {type === 'contact' && (
         <div className="border rounded-xl p-6 lg:p-8 backdrop-blur-md col-span-1 md:col-span-2" style={{ borderColor: 'var(--color-term-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 60%, transparent)' }}>
-          <h3 className="font-bold text-xl mb-4" style={{ color: 'var(--color-term-accent)' }}>Contact Details</h3>
+          <h3 className="font-bold text-lg sm:text-xl mb-3 sm:mb-4" style={{ color: 'var(--color-term-accent)' }}>Contact Details</h3>
           <div className="space-y-2 text-sm" style={{ color: 'var(--color-term-text-h)' }}>
             <p><span className="opacity-70">Email:</span> arnabkundu854@gmail.com</p>
             <p><span className="opacity-70">Location:</span> Kolkata, WB, India</p>
@@ -610,19 +618,49 @@ export default function App() {
           setHistory(prev => [...prev, { id: Date.now().toString() + '-er', type: 'error', content: `Command not found: ${currentInput}. Type /help for a list of commands.` }]);
         }, 100);
       }
-    } else {
+} else {
       pushCommandToHistory(currentInput);
       setInput('');
       setShowAutocomplete(false);
       setIsTyping(true);
-      // Reset cognitive mode to idle during AI response
       setCognitiveMode('idle');
 
-      setTimeout(() => {
-        const randomResponse = AGENT_RESPONSES[Math.floor(Math.random() * AGENT_RESPONSES.length)];
-        setHistory(prev => [...prev, { id: Date.now().toString() + '-ag', type: 'agent', content: randomResponse }]);
-        setIsTyping(false);
-      }, 1200);
+      fetch('https://langflow-dev.mangobeach-b9acefb4.westus2.azurecontainerapps.io/api/v1/run/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'sk-i8v-wY4VFB8bNsmOKLFzAGqabn7QMbfcRj0wJax3g98'
+        },
+        body: JSON.stringify({
+          output_type: 'chat',
+          input_type: 'chat',
+          session_id: generateSessionId(),
+          tweaks: {
+            "ChatInput-3S93U": {
+              input_value: currentInput
+            }
+          }
+        })
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('API request failed');
+          return res.json();
+        })
+        .then(data => {
+          console.log('Langflow response:', data);
+          const response = data?.outputs?.[0]?.outputs?.[0]?.results?.message?.text ||
+                          data?.outputs?.[0]?.outputs?.[0]?.artifacts?.message ||
+                          data?.outputs?.[0]?.outputs?.[0]?.outputs?.message?.message ||
+                          AGENT_RESPONSES[Math.floor(Math.random() * AGENT_RESPONSES.length)];
+          setHistory(prev => [...prev, { id: Date.now().toString() + '-ag', type: 'agent', content: response }]);
+          setIsTyping(false);
+        })
+        .catch((err) => {
+          console.error('API Error:', err);
+          const randomResponse = AGENT_RESPONSES[Math.floor(Math.random() * AGENT_RESPONSES.length)];
+          setHistory(prev => [...prev, { id: Date.now().toString() + '-ag', type: 'agent', content: randomResponse }]);
+          setIsTyping(false);
+        });
     }
   };
 
