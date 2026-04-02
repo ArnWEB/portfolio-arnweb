@@ -184,14 +184,13 @@ function FragmentedCognitiveCore({ mode }: { mode: string }) {
   }
 
   return (
-    <div className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden bg-black">
+<div className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden bg-black">
       <Canvas
-        camera={{ position: [0, 0, 3.0], fov: 55 }}
-        // Ensure proper rendering settings
         gl={{ antialias: true, preserveDrawingBuffer: true }}
-        onCreated={({ gl }) => {
-          // Set clear color to avoid black flashes
+        camera={{ position: [0, 0, 3.0], fov: 55 }}
+        onCreated={({ gl, size }) => {
           gl.setClearColor(0x000000, 0);
+          gl.setSize(size.width, size.height);
         }}
       >
         <ambientLight intensity={0.3} />
@@ -235,9 +234,9 @@ type HistoryItem = {
 };
 
 const HomeOutput = ({ executeCommand, mode }: { executeCommand: (cmd: string) => void; mode: string }) => (
-  <div className="flex flex-col xl:flex-row w-full gap-2 sm:gap-4 flex-1" style={{ minHeight: 'calc(100% - 2rem)' }}>
+  <div className="flex flex-col xl:flex-row w-full gap-2 sm:gap-4 flex-1">
     {/* Left: 3D Canvas — stretches to full height of the row */}
-    <div className="xl:w-[42%] rounded-xl overflow-hidden border border-[var(--color-term-border)] relative flex-1 xl:flex-none" style={{ minHeight: '180px' }}>
+    <div className="xl:w-[42%] rounded-xl overflow-hidden border border-[var(--color-term-border)] relative shrink-0 h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-full xl:w-[42%]">
       <FragmentedCognitiveCore mode={mode} />
       {/* Contact overlay pinned to bottom of the 3D block */}
       <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-gradient-to-t from-black/80 to-transparent">
@@ -673,7 +672,7 @@ export default function App() {
         </div>
 
         {/* Scrolling Terminal History */}
-        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth h-0 min-h-0" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', flex: '1 1 auto' }}>
+        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', minHeight: '20vh' }}>
           {history.map((item, index) => (
             <div key={item.id} className="w-full flex flex-col max-w-full">
               {item.type === 'command' && (
