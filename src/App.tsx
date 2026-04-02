@@ -690,27 +690,28 @@ export default function App() {
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none transition-colors duration-1000 bg-[var(--color-bg)]/50" />
       <motion.div animate={{ x: mousePos.x - 300, y: mousePos.y - 300 }} transition={{ type: "spring", damping: 50, stiffness: 200, mass: 0.5 }} className="absolute w-[600px] h-[600px] rounded-full blur-[100px] opacity-40 z-0 pointer-events-none" style={{ background: 'var(--glow-color-1)' }} />
 
-      <motion.div
+<motion.div
         ref={windowRef} drag dragConstraints={{ left: -300, right: 300, top: -200, bottom: 200 }} dragElastic={0.1} dragMomentum={false}
         initial={{ opacity: 0, scale: 0.8, rotateX: 20, y: 50 }} animate={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }} transition={{ duration: 0.8, type: "spring", bounce: 0.4 }} style={{ perspective: 1000 }}
-        className="w-full max-w-[1500px] h-full max-h-[95vh] sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
+        className="w-full max-w-[1500px] h-full max-h-[100vh] sm:max-h-[96vh] 2xl:max-h-[98vh] xl:w-[96vw] z-10 glass-panel rounded-xl flex flex-col overflow-hidden relative shadow-[0_0_80px_rgba(0,0,0,0.6)] border border-[var(--color-term-border)]"
       >
         {/* Title Bar */}
-        <div className="h-10 shrink-0 bg-[var(--color-bg)]/90 border-b border-[var(--color-term-border)] flex items-center px-4 justify-between select-none cursor-move group">
-          <div className="flex gap-2 w-16 opacity-70 group-hover:opacity-100 transition-opacity">
+        <div className="h-10 sm:h-10 shrink-0 bg-[var(--color-bg)]/90 border-b border-[var(--color-term-border)] flex items-center px-3 sm:px-4 justify-between select-none cursor-move group">
+          <div className="flex gap-2 w-12 sm:w-16 opacity-70 group-hover:opacity-100 transition-opacity">
             <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500" />
           </div>
           <div className="text-xs font-semibold tracking-wider flex items-center gap-2 truncate px-2 opacity-80" style={{ color: 'var(--color-term-text)' }}>
             <Terminal size={14} style={{ color: 'var(--color-term-accent)' }} className="shrink-0" />
-            <span className="truncate">arnab_ai_cli ~ /portfolio [{THEMES[themeIndex]}]</span>
+            <span className="hidden sm:inline truncate">arnab_ai_cli ~ /portfolio [{THEMES[themeIndex]}]</span>
+            <span className="sm:hidden text-[10px]">AI Chat</span>
           </div>
-          <div className="w-16" />
+          <div className="w-12 sm:w-16" />
         </div>
 
-        {/* Scrolling Terminal History */}
-        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', minHeight: '20vh' }}>
+        {/* Scrolling Terminal History - chat-like on mobile */}
+        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', minHeight: '30vh' }}>
           {history.map((item, index) => (
             <div key={item.id} className="w-full flex flex-col max-w-full">
               {item.type === 'command' && (
@@ -774,19 +775,19 @@ export default function App() {
             )}
           </AnimatePresence>
 
-          <form onSubmit={handleFormSubmit} className="flex items-center gap-2 sm:gap-4 w-full p-2 sm:p-4">
-            <span className="font-bold text-lg select-none shrink-0" style={{ color: 'var(--color-term-accent)' }}>
+<form onSubmit={handleFormSubmit} className="flex items-center gap-2 sm:gap-4 w-full p-2 sm:p-4 border-t border-[var(--color-term-border)]">
+            <span className="font-bold text-xl select-none shrink-0 hidden sm:block" style={{ color: 'var(--color-term-accent)' }}>
               <ChevronRight size={24} strokeWidth={3} />
             </span>
             <input
               ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} onBlur={() => setTimeout(() => setShowAutocomplete(false), 200)}
-              placeholder="Type command..."
-              className="flex-1 bg-transparent border-none outline-none font-bold font-mono text-xs sm:text-sm w-full min-w-0 placeholder-opacity-40"
+              placeholder="Ask me anything..."
+              className="flex-1 bg-[var(--color-term-bg)]/50 border border-[var(--color-term-border)] rounded-lg px-3 py-2 sm:py-2.5 outline-none font-bold font-mono text-xs sm:text-sm w-full min-w-0 placeholder-opacity-40"
               style={{ color: 'var(--color-term-text-h)', caretColor: 'var(--color-term-accent)' }}
               autoComplete="off" spellCheck="false"
             />
             <button
-              type="submit" className="p-2.5 rounded-lg transition-all shrink-0 hover:opacity-80 disabled:opacity-20 shadow-sm" disabled={!input.trim()}
+              type="submit" className="p-2 sm:p-2.5 rounded-lg transition-all shrink-0 hover:opacity-80 disabled:opacity-20 shadow-sm" disabled={!input.trim()}
               style={{ backgroundColor: input.trim() ? 'var(--color-term-accent)' : 'transparent', color: input.trim() ? 'var(--color-bg)' : 'var(--color-term-text)' }}
             >
               <Send size={18} />
