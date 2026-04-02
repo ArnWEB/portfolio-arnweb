@@ -710,20 +710,20 @@ export default function App() {
           <div className="w-12 sm:w-16" />
         </div>
 
-        {/* Scrolling Terminal History - chat-like on mobile */}
-        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-2 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', minHeight: '30vh' }}>
+        {/* Scrolling Terminal History - compact on mobile */}
+        <div ref={containerRef} className="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col p-1 sm:p-4 lg:p-6 w-full custom-scrollbar scroll-smooth" style={{ backgroundColor: 'color-mix(in srgb, var(--color-term-bg) 85%, transparent)', minHeight: '20vh' }}>
           {history.map((item, index) => (
             <div key={item.id} className="w-full flex flex-col max-w-full">
               {item.type === 'command' && (
-                <div className="flex items-center gap-3 text-lg font-bold mb-4 mt-2">
-                  <span style={{ color: 'var(--color-term-accent)' }}><ChevronRight size={20} strokeWidth={3} /></span>
+                <div className="flex items-center gap-2 text-sm sm:text-lg font-bold mb-2 sm:mb-4 mt-1 sm:mt-2">
+                  <span style={{ color: 'var(--color-term-accent)' }}><ChevronRight size={18} strokeWidth={3} /></span>
                   <span style={{ color: 'var(--color-term-text-h)' }}>{item.content}</span>
                 </div>
               )}
               {item.type === 'agent' && (
-                <div className="mb-6 p-4 rounded-xl border border-[var(--color-term-accent)]/30 w-fit max-w-[85%] bg-[var(--color-term-accent)]/5">
-                  <div className="text-[10px] font-bold mb-1 opacity-50 uppercase tracking-widest text-[var(--color-term-text-h)]">Agent Core</div>
-                  <div className="font-semibold" style={{ color: 'var(--color-term-text-h)' }}>
+                <div className="mb-2 sm:mb-6 p-2 sm:p-4 rounded-xl border border-[var(--color-term-accent)]/30 w-fit max-w-[85%] bg-[var(--color-term-accent)]/5">
+                  <div className="text-[8px] sm:text-[10px] font-bold mb-1 opacity-50 uppercase tracking-widest text-[var(--color-term-text-h)]">Agent Core</div>
+                  <div className="font-semibold text-xs sm:text-sm" style={{ color: 'var(--color-term-text-h)' }}>
                     {index === history.length - 1 ? <TypewriterText text={item.content || ""} speed={15} /> : item.content}
                   </div>
                 </div>
@@ -775,7 +775,7 @@ export default function App() {
             )}
           </AnimatePresence>
 
-<form onSubmit={handleFormSubmit} className="flex items-center gap-2 sm:gap-4 w-full p-2 sm:p-4 border-t border-[var(--color-term-border)]">
+<form onSubmit={handleFormSubmit} className="flex items-center gap-1 sm:gap-4 w-full p-1.5 sm:p-4 border-t border-[var(--color-term-border)] bg-[var(--color-bg)]/95">
             <span className="font-bold text-xl select-none shrink-0 hidden sm:block" style={{ color: 'var(--color-term-accent)' }}>
               <ChevronRight size={24} strokeWidth={3} />
             </span>
